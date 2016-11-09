@@ -1,8 +1,10 @@
 # include <stdio.h>
 # include "archivo.h"
-# include <stdlib.h> 
+# include "lexico.cpp"
+
 
 int main() {
 	get_file();
 
-}
+
+}	

@@ -1,0 +1,16 @@
+A
+A + B > 5
+A AND B
+45 < 43 AND A - C
+NOT ( A + B AND C - D ) OR NOT ( E / 2 >= 21 )
+AND B - C
+NOT ( ( AND ) )
+NOT ( OR ( ) )
+NOT ( A > B >= C )
+A )
+B = ( C == Y )
+true AND 5
+preguntar si los digitos son validos como expresion porque dice que son ident y un ident no es un digito solo.
+preguntar si en vez de ident son todos los tokens especificadps (separator, ident...)
+preguntar si van asi: "( a" o "(a"
+preguntar que diablos son los integer, y number aclarar
