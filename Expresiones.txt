@@ -13,3 +13,7 @@ true AND 5
 A AND B AND C
 A AND 5 < 4
 A AND ( B AND C )
+\p And 4
+ñ nado s
+!a not a
+!= and B

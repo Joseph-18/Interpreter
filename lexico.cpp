@@ -17,6 +17,7 @@ public:
 		for (int i = 0; i < linea.length(); ++i) {
 			if (logic == true){
 				logic = inputElement(linea, i);
+				//printf("%d\n", logic);
 			}else {
 				return logic;
 			};
@@ -24,6 +25,7 @@ public:
 		return logic;
 	};
 	bool inputElement(string linea, int i) {
+		//printf("%d\n", buscarElement(char(linea[i])));
 		if (buscarElement(char(linea[i]))== 1) {
 			if (linea[i] == '!') {
 				if (i+1 < linea.length()-1) {
@@ -36,8 +38,7 @@ public:
 					return false;
 				};
 			}else {
-				if (linea[i] == '\\')
-				{
+				if (linea[i] == '\\') {
 					if (i+1 < linea.length()-1) {
 						if (linea[i+1] == 't' || linea[i+1] == 'n' || linea[i+1] == 'r' || linea[i+1] == 'f') {
 							return true;
@@ -52,16 +53,15 @@ public:
 		}else{
 			return false;
 		};
+		return true;
 	};
 	int buscarElement(char letter) {
 
 		for (int i = 0; i < 77; ++i) {
 			if (letter == elementos[i]){
 				return 1;
-			}else {
-				return 0;
 			};
 		};
+		return 0;
 	};
-
 };

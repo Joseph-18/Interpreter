@@ -10,6 +10,7 @@ void get_file() {
 	while(fe.peek() != EOF) {
 		fe.getline(linea, 500);
 		Lexico obj1;
+		//obj1.lex(string(linea));
 		printf("%d\n", obj1.lex(string(linea)));
 	};
 };
