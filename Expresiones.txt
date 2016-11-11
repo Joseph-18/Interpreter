@@ -16,4 +16,7 @@ A AND ( B AND C )
 \p And 4
 ñ nado s
 !a not a
-!= and B
+!= and B 
+aA and B!
+AFbQ and (f-)
+AFvq and F.
