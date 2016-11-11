@@ -1,6 +1,7 @@
 # include <stdlib.h>
 # include <fstream>
 # include "lexico.cpp"
+# include "sintactico.cpp"
 using namespace std;
 
 /** Archivo de cabecera para leer un archivo .txt.
@@ -15,12 +16,20 @@ int get_file() {
 	ifstream fe("Expresiones.txt");
 	int j=0;
 	Lexico obj1;
+	Sintactico obj2;
+	Semantico obj3;
 	while(fe.peek() != EOF) {
 		fe.getline(linea, 500);
 		j=j+1;
 		if (obj1.lex(string(linea)) == false) {
 			printf("LINEA %i: Error léxico/de sintaxis\n", j);
 			return (0);
+		}else{
+			if (obj2.Sintax(string(linea) == false)) {
+				printf("LINEA %i: Error léxico/de sintaxis\n", j);
+			}else{
+				//instruciones para la semantica
+			};
 		};
 		//printf("%d\n", obj1.lex(string(linea)));
 	};

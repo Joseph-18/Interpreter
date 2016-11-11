@@ -38,7 +38,7 @@ public:
 		//printf("%d\n", buscarElement(char(linea[i])));
 		if (buscarElement(char(linea[i]))== 1) {
 			if (linea[i] == '!') {
-				if (i+1 < linea.length()) {
+				if (i+1 < linea.length()-1) {
 					if (linea[i+1] == '=') {
 						return true;
 					}else{
@@ -49,7 +49,7 @@ public:
 				};
 			}else {
 				if (linea[i] == '\\') {
-					if (i+1 < linea.length()) {
+					if (i+1 < linea.length()-1) {
 						if (linea[i+1] == 't' || linea[i+1] == 'n' || linea[i+1] == 'r' || linea[i+1] == 'f') {
 							return true;
 						}else{

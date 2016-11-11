@@ -5,6 +5,10 @@ using namespace std;
 string elementos2[]={""};
 char operadores[8]={'+','-','*','/','<','>','=','!'};
 int finalArray = 0;
+string letters[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+					"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+string numbers[10] = {"0","1","2","3","4","5","6","7","8","9"};
+string operators[]={"+","-","*","/","<",">","=","!=","<=",">=","==","AND","OR"};
 
 
 class Sintactico {
@@ -18,7 +22,7 @@ public:
 		string a;
 		
 		for (int i = 0; i < linea.length(); ++i){
-			if (linea[i] == '(' || linea[i] == ')' || linea[i] == ' ' || BuscarOperator(linea[i])==1){
+			if (linea[i] == '(' || linea[i] == ')' || linea[i] == ' ' || buscarOperator(linea[i])==1){
 				elementos2[finalArray] = a;
 				finalArray += 1; 
 				a = "";
@@ -39,19 +43,7 @@ public:
 				a += linea[i];
 			};
 		};
-	};
-
-
-/*	bool sintax(string linea){
-		int expr;
-
-		if (linea != ''){
-			for (int i = 0; i < sizeof(elementos2)/4; ++i){
-				
-			};
-		};	
-	};*/
-	
+	};	
 	int buscarOperator(char letter){
 		
 		for (int i = 0; i < 8; ++i){
@@ -60,8 +52,124 @@ public:
 			}
 		}
 		return 0;
-
 	};
+	bool verificarExpresion(string palabra[], int i, int j) {
+
+		int expr = 0;
+		int parentesis = 0;
+
+		for (int k = i; k < j; ++k) {
+			if ((palabra[k] == "NOT")||(palabra[k] == ")")) {
+				if (expr > 0) {
+					return false;
+				};
+				if (palabra[k] == "(") {
+					 parentesis += 1;
+				};
+			}else{
+				if (ident(palabra[k]) || number(palabra[k])) {
+					if (expr > 0) {
+						return false;	
+					}else{
+						expr = 1;
+					};
+				}else {
+					if (palabra[k] == ")") {
+						if (expr == 0) {
+							return false;
+						}else {
+							if (parentesis > 0) {
+								parentesis -= 1;
+							}else {
+								return false;
+							};
+						};
+					};
+				};
+			};
+		};
+		if (expr == 1) {
+			return true;	
+		}else{
+			return false;
+		};
+	};
+	bool ident(string token) {
+
+		if (inside_letter(token[0]) || token[0] == "_") {
+			for (int i = 0; i < token.length(); ++i) {
+				if (!inside_letter(token[i]) && !inside_number(token[i]) && token[i] != "_") {
+					return false;
+				};
+			};
+		}else{
+			return false;
+		};
+		return true;
+	};
+	bool number(string num) {
+
+		for (int i = 0; i < num.length(); ++i) {
+			if (!inside_number(num[i])) {
+				return false;
+			};
+		};
+		return true;
+	};
+	bool inside_letter(char letter) {
+
+		for (int i = 0; i < sizeof(letters)/4; ++i) {
+			if (letter == letters[i]) {
+				return true;
+			};
+		};
+		return false;
+	};
+	bool inside_number(char number) {
+
+		for (int i = 0; i < sizeof(numbers)/4; ++i) {
+			if (number == numbers[i]) {
+				return true;
+			};
+		};
+		return false;
+	};
+	bool sintax(string palabra[], int i, int j){
+	/** Método que permite validar si cada posición del arreglo dinámico  
+	*
+	*/
+		if (j > 0){
+			if (j+1 < sizeof(palabra)/4){
+			
+				if (verificarExpresion(palabra, i, j) == true){
+					sintax(palabra, j+1, arrayOperator(palabra, j+1));
+				}else{
+					return false;
+				};
+			
+			}else{
+				return false;
+			};
+		
+		}else{
+			if (j==0){
+				return false;
+			}else{
+				return verificarExpresion(palabra, i, sizeof(palabra)/4);
+			};
+
+		};
 	
-	
+	};
+	int arrayOperator(string palabra[], int k){
+
+		for (int i = k; i < sizeof(palabra)/4; ++i){
+			for (int j = 0; j < sizeof(operators)/4; ++j){
+				if (palabra[i]==operators[j]){
+					return i;
+				};
+			};
+		};
+		return -1;
+	};
 };
