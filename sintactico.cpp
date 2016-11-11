@@ -5,10 +5,10 @@ using namespace std;
 string elementos2[]={""};
 char operadores[8]={'+','-','*','/','<','>','=','!'};
 int finalArray = 0;
-string letters[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
-					"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-string numbers[10] = {"0","1","2","3","4","5","6","7","8","9"};
-string operators[]={"+","-","*","/","<",">","=","!=","<=",">=","==","AND","OR"};
+char letters[52] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+char numbers[10] = {'0','1','2','3','4','5','6','7','8','9'};
+string operators[13]={"+","-","*","/","<",">","=","!=","<=",">=","==","AND","OR"};
 
 
 class Sintactico {
@@ -17,10 +17,31 @@ class Sintactico {
 */
 public:
 	
+	bool sintax(string palabra[], int i, int j){
+	/** Método que permite validar si cada posición del arreglo dinámico  
+	*
+	*/
+		if (j > 0){
+			if (j+1 < sizeof(palabra)/4){
+				if (verificarExpresion(palabra, i, j)){
+					return sintax(palabra, j+1, arrayOperator(palabra, j+1));
+				}else{
+					return false;
+				};
+			}else{
+				return false;
+			};
+		}else{
+			if (j == 0){
+				return false;
+			}else{
+				return verificarExpresion(palabra, i, sizeof(palabra)/4);
+			};
+		};
+	};
 	void items(string linea){
 		
 		string a;
-		
 		for (int i = 0; i < linea.length(); ++i){
 			if (linea[i] == '(' || linea[i] == ')' || linea[i] == ' ' || buscarOperator(linea[i])==1){
 				elementos2[finalArray] = a;
@@ -49,8 +70,8 @@ public:
 		for (int i = 0; i < 8; ++i){
 			if (letter == operadores[i]){
 				return 1;
-			}
-		}
+			};
+		};
 		return 0;
 	};
 	bool verificarExpresion(string palabra[], int i, int j) {
@@ -96,9 +117,9 @@ public:
 	};
 	bool ident(string token) {
 
-		if (inside_letter(token[0]) || token[0] == "_") {
+		if (inside_letter(token[0]) || token[0] == '_') {
 			for (int i = 0; i < token.length(); ++i) {
-				if (!inside_letter(token[i]) && !inside_number(token[i]) && token[i] != "_") {
+				if (!inside_letter(token[i]) && !inside_number(token[i]) && token[i] != '+') {
 					return false;
 				};
 			};
@@ -133,33 +154,6 @@ public:
 			};
 		};
 		return false;
-	};
-	bool sintax(string palabra[], int i, int j){
-	/** Método que permite validar si cada posición del arreglo dinámico  
-	*
-	*/
-		if (j > 0){
-			if (j+1 < sizeof(palabra)/4){
-			
-				if (verificarExpresion(palabra, i, j) == true){
-					sintax(palabra, j+1, arrayOperator(palabra, j+1));
-				}else{
-					return false;
-				};
-			
-			}else{
-				return false;
-			};
-		
-		}else{
-			if (j==0){
-				return false;
-			}else{
-				return verificarExpresion(palabra, i, sizeof(palabra)/4);
-			};
-
-		};
-	
 	};
 	int arrayOperator(string palabra[], int k){
 
