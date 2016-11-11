@@ -13,7 +13,7 @@ class Sintactico {
 */
 public:
 	
-	void Items(string linea){
+	void items(string linea){
 		
 		string a;
 		
@@ -27,7 +27,7 @@ public:
 					a = linea[i];
 				};
 
-				if ((linea[i] == '!') || (linea[i] == '<' && i+1<linea.length()-1 && linea[i+1] == '=') || (linea[i] == '>' && i+1<linea.length()-1 && linea[i+1] == '=') || (linea[i] == '=' && i+1<linea.length()-1 && linea[i+1] == '=')){
+				if ((linea[i] == '!') || (linea[i] == '<' && i+1<linea.length() && linea[i+1] == '=') || (linea[i] == '>' && i+1<linea.length() && linea[i+1] == '=') || (linea[i] == '=' && i+1<linea.length() && linea[i+1] == '=')){
 					a += linea[i+1];
 					i += 2;
 					elementos2[finalArray] = a;
@@ -41,7 +41,8 @@ public:
 		};
 	};
 
-	bool Sintax(string linea){
+
+/*	bool sintax(string linea){
 		int expr;
 
 		if (linea != ''){
@@ -49,9 +50,9 @@ public:
 				
 			};
 		};	
-	};
+	};*/
 	
-	int BuscarOperator(char letter){
+	int buscarOperator(char letter){
 		
 		for (int i = 0; i < 8; ++i){
 			if (letter == operadores[i]){
