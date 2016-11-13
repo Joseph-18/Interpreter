@@ -17,6 +17,11 @@ int get_file() {
 	int j=0;
 	Lexico obj1;
 	Sintactico obj2;
+	string qw[] = {"B",">","C"};
+	//printf("%i\n", int(sizeof(qw)/sizeof(qw[0])));
+	printf("%i\n", obj2.inside_operator(qw[1]));
+	printf("%i\n", obj2.arrayOperator(qw,0));
+	//printf("%i\n", obj2.sintax(qw,0,1));
 	while(fe.peek() != EOF) {
 		fe.getline(linea, 500);
 		j=j+1;
@@ -24,9 +29,12 @@ int get_file() {
 			printf("LINEA %i: Error léxico/de sintaxis\n", j);
 			return (0);
 		}else{
-			/*obj2.items(string(linea));
-			if (obj2.sintax(elementos2,0,obj2.arrayOperator(elementos2,0)) == false) {
-				printf("LINEA %i: Error léxico/de sintaxis\n", j);
+			//obj2.items(string(linea));
+			//printf("%i\n", obj2.sintax(qw,0,1));
+			
+			//printf("%i\n", obj2.arrayOperator(qw,0));
+			/*if (obj2.sintax(elementos2,0,obj2.arrayOperator(elementos2,0)) == false) {
+				printf("LINEA %i: Error de sintaxis\n", j);
 			}else{
 				//instruciones para la semantica
 			};*/
